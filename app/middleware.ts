@@ -1,29 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import Cookies from "js-cookie";
 
 // Esta función se ejecuta para todas las rutas de la aplicación
 export function middleware(request: NextRequest) {
-  const isAuthenticated = checkIfUserIsAuthenticated(request); // Función personalizada de autenticación
+  const authToken = request.cookies.get('auth_token');
+  console.log('exit', authToken)
 
   // Rutas a proteger
-  if (request.nextUrl.pathname.startsWith("/dashboard") && !isAuthenticated) {
+  if (!authToken) {
+    console.log('exit')
     // Si no está autenticado, redirige a la página de login
     return NextResponse.redirect(new URL("/login", request.url));
   }
-
-  if (request.nextUrl.pathname.startsWith("/login") && isAuthenticated) {
-    // Si no está autenticado, redirige a la página de login
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
   return NextResponse.next();
 }
 
-// Función de verificación de autenticación (puedes personalizarla según tus necesidades)
-function checkIfUserIsAuthenticated(request: NextRequest) {
-  // Aquí verificas si el usuario está autenticado.
-  // Puede ser a través de cookies, tokens en headers, etc.
-  const token = Cookies.get("auth_token"); // Obtener el token de las cookies
-
-  return token !== undefined; // Verifica si el token existe
-}
+export const config = {
+  matcher: [ '/dashboard/:path*'], // Aplica a rutas de dashboard
+};

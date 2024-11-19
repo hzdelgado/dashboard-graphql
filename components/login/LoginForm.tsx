@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PasswordInput from "../input/PasswordInput";
 import { isValidPassword } from "@/utils/validations";
-import { setTokenInCookie } from "@/utils/cookie";
+import { setTokenInCookie } from "@/utils/cookies";
 import TextInput from "../input/TextInput";
 import { useLoader } from "@/context/LoaderContext";
 import { loginUser } from "@/services/authService";
@@ -35,8 +35,9 @@ const LoginForm = () => {
       try {
         const userData = await loginUser(email, password);
         // Guardamos el token en una cookie con una fecha de expiración
-        setTokenInCookie(userData.token); // Expira en 1 día
-        router.push("/dashboard")
+        console.log('userData', userData)
+        setTokenInCookie(userData); // Expira en 1 día
+        router.push("/dashboard/home")
       } catch (error: any) {
         setError(error.message || "Login failed");
       } finally {

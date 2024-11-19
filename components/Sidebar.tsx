@@ -7,12 +7,12 @@ const Sidebar = () => {
     <nav className="mt-4">
       <ul>
         <li className="mb-2">
-          <Link href="/dashboard">
+          <Link href="/dashboard/home">
             <span className="hover:underline">Home</span>
           </Link>
         </li>
         <li className="mb-2">
-          <Link href="/dashboard/profile">
+          <Link href="/dashboard/users">
             <span className="hover:underline">Users</span>
           </Link>
         </li>

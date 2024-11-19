@@ -1,3 +1,4 @@
+"use client";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
@@ -13,7 +14,7 @@ export default function DashboardLayout({
       {/* Contenido principal */}
       <div className="flex flex-col flex-1 bg-gray-100">
         <Header />
-        <main className="flex-1 p-4">{children}</main>
+        {children}
       </div>
     </div>
   );
