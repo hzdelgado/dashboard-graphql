@@ -6,7 +6,7 @@ export const setTokenInCookie = (token: string) => {
     expires: 1,  // Expiración de 1 día
     path: '/',   // Asegura que la cookie sea accesible desde todo el dominio
     sameSite: 'Strict', // Previene que se envíe la cookie en solicitudes cross-site
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
   });
 };
 

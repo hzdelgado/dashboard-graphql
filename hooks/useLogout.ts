@@ -14,8 +14,15 @@ const useLogout = (): UseLogoutHook  => {
         path: '/', // Asegúrate de que el path coincida con el que se usó al configurar la cookie
       });
 
-      // Redirigir al usuario a la página de login
-      router.push('/login');
+      const response = await fetch('/api/logout', {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        // Redirigir al usuario a la página de login
+        router.push('/login');
+      }
+
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
