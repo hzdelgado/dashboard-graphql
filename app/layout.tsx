@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ApolloProvider from "../lib/ApolloProvider";
-import OverlayLoader from "./components/loader/OverlayLoader";
+import ApolloProvider from "../utils/ApolloProvider";
+import OverlayLoader from "../components/loader/OverlayLoader";
 import { LoaderProvider } from "@/context/LoaderContext";
 
 const geistSans = localFont({

@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import Cookies from "js-cookie";
 
 // Esta función se ejecuta para todas las rutas de la aplicación
 export function middleware(request: NextRequest) {
@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
 function checkIfUserIsAuthenticated(request: NextRequest) {
   // Aquí verificas si el usuario está autenticado.
   // Puede ser a través de cookies, tokens en headers, etc.
-  const token = request.cookies.get("auth_token");
+  const token = Cookies.get("auth_token"); // Obtener el token de las cookies
 
   return token !== undefined; // Verifica si el token existe
 }

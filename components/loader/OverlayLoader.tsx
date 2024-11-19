@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useLoader } from "../../../context/LoaderContext";
+import { useLoader } from "../../context/LoaderContext";
 
 const OverlayLoader: React.FC = () => {
     const { loading } = useLoader(); // Acceder al estado global del loader

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PasswordInput from "../input/PasswordInput";
 import { isValidPassword } from "../../utils/validations";
-import EmailInput from "../input/TextInput";
 import TextInput from "../input/TextInput";
 
 const RegisterForm = () => {
@@ -12,9 +11,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-
   const router = useRouter();
-
  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

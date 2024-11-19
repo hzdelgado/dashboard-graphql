@@ -8,7 +8,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",  // Establece la raíz del proyecto como la base para los imports.
     "paths": {
-      "@/*": ["./*"]
+      "@/utils/*": ["./utils/*"],
+      "@/services/*": ["./services/*"],
+      "@/components/*": ["./components/*"],
+      "@/context/*": ["./context/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

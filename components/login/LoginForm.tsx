@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PasswordInput from "../input/PasswordInput";
-import { isValidPassword } from "@/app/utils/validations";
+import { isValidPassword } from "@/utils/validations";
+import { setTokenInCookie } from "@/utils/cookie";
 import TextInput from "../input/TextInput";
-import { useLoader } from "../../../context/LoaderContext"; // Usamos el hook para controlar el loader
+import { useLoader } from "@/context/LoaderContext";
+import { loginUser } from "@/services/authService";
+import Cookies from "js-cookie";
 
 const LoginForm = () => {
     const router = useRouter();
@@ -18,41 +21,26 @@ const LoginForm = () => {
   
     const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault();
+      // Activamos el loader antes de comenzar la operación asíncrona
       showLoader();
 
-      if (!isValidPassword(password)) {
+      /*if (!isValidPassword(password)) {
         setError(
           "La contraseña debe tener al menos 6 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial."
         );
         hideLoader()
         return;
-      }
-
-      // Activamos el loader antes de comenzar la operación asíncrona
-
+      }*/
   
       try {
-        // Aquí podrías agregar la lógica para autenticar al usuario
-        // por ejemplo, enviar los datos a una API
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-  
-        if (response.ok) {
-          // Redirige al dashboard
-          router.push("/");
-        } else {
-          const data = await response.json();
-          setError(data.message || "Login failed");
-        }
-      } catch (err) {
-        setError("An unexpected error occurred");
+        const userData = await loginUser(email, password);
+        // Guardamos el token en una cookie con una fecha de expiración
+        setTokenInCookie(userData.token); // Expira en 1 día
+        router.push("/dashboard")
+      } catch (error: any) {
+        setError(error.message || "Login failed");
+      } finally {
         hideLoader();
-
       }
     };
   
