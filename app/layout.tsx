@@ -4,6 +4,7 @@ import "./globals.css";
 import ApolloProvider from "../utils/ApolloProvider";
 import OverlayLoader from "../components/loader/OverlayLoader";
 import { LoaderProvider } from "@/context/LoaderContext";
+import { ThemeProvider } from "@/context/ThemeContext"; // Importamos el ThemeProvider
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,17 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-         <LoaderProvider>
-      {/* Renderiza el loader globalmente */}
-      <OverlayLoader />
-      <ApolloProvider>{children}</ApolloProvider>
-    </LoaderProvider>
-          
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <LoaderProvider>
+            {/* Renderiza el loader globalmente */}
+            <OverlayLoader />
+            <ApolloProvider>{children}</ApolloProvider>
+          </LoaderProvider>
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import PasswordInput from "../input/PasswordInput";
 import { isValidPassword } from "../../utils/validations";
 import TextInput from "../input/TextInput";
+import { signUpUser } from "@/services/authService";
+import { setTokenInCookie } from "@/utils/cookies";
+import { useLoader } from "@/context/LoaderContext";
 
 const RegisterForm = () => {
   const [name, setName] = useState<string>("");
@@ -12,9 +15,11 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const router = useRouter();
- 
+  const { showLoader, hideLoader } = useLoader();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    showLoader();
 
     if (!isValidPassword(password)) {
       setError(
@@ -28,16 +33,28 @@ const RegisterForm = () => {
       return;
     }
 
-    router.push("/dashboard");
+    try {
+      const userData = await signUpUser(name, email, password);
+      // Guardamos el token en una cookie con una fecha de expiración
+      console.log('userData', userData)
+      setTokenInCookie(userData.token); // Expira en 1 día
+      router.push("/dashboard/home")
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      hideLoader();
+    }
+
   };
 
   return (
+    <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
+
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-md p-8 bg-white shadow-md rounded-md"
     >
       <h1 className="text-2xl font-semibold text-gray-800 text-center mb-6">
-        Registrarse
+        Registro
       </h1>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
@@ -78,9 +95,19 @@ const RegisterForm = () => {
         type="submit"
         className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
       >
-        Registrarse
+        Sign up
       </button>
     </form>
+    <p className="mt-4 text-center text-sm text-gray-600">
+    ¿Ya estas registrad@?{" "}
+    <a
+      href="/login"
+      className="text-indigo-600 hover:underline"
+    >
+      Ingresa aquí
+    </a>
+  </p>
+  </div>
   );
 };
 

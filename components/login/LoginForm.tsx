@@ -3,12 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PasswordInput from "../input/PasswordInput";
-import { isValidPassword } from "@/utils/validations";
 import { setTokenInCookie } from "@/utils/cookies";
 import TextInput from "../input/TextInput";
 import { useLoader } from "@/context/LoaderContext";
 import { loginUser } from "@/services/authService";
-import Cookies from "js-cookie";
 
 const LoginForm = () => {
     const router = useRouter();
@@ -21,25 +19,15 @@ const LoginForm = () => {
   
     const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault();
-      // Activamos el loader antes de comenzar la operación asíncrona
       showLoader();
-
-      /*if (!isValidPassword(password)) {
-        setError(
-          "La contraseña debe tener al menos 6 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial."
-        );
-        hideLoader()
-        return;
-      }*/
-  
       try {
         const userData = await loginUser(email, password);
         // Guardamos el token en una cookie con una fecha de expiración
         console.log('userData', userData)
-        setTokenInCookie(userData); // Expira en 1 día
+        setTokenInCookie(userData.token); // Expira en 1 día
         router.push("/dashboard/home")
       } catch (error: any) {
-        setError(error.message || "Login failed");
+        setError(error.message);
       } finally {
         hideLoader();
       }
@@ -47,7 +35,7 @@ const LoginForm = () => {
   
     return (
         <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
-          <h2 className="text-2xl font-bold text-center mb-6">Login Dashboard</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Ingreso</h2>
           <form onSubmit={handleLogin}>
             {/* Correo */}
             <TextInput
@@ -73,7 +61,7 @@ const LoginForm = () => {
             </button>
           </form>
           <p className="mt-4 text-center text-sm text-gray-600">
-            ¿No tienes cuenta?{" "}
+            ¿No estas registrado?{" "}
             <a
               href="/register"
               className="text-indigo-600 hover:underline"
