@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface Column {
   key: string;
@@ -21,11 +21,18 @@ export default function PaginatedTable({
   onRowClick,
 }: PaginatedTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentRows, setCurrentRows] = useState<any[]>([]);
 
   // Calcular las filas para la página actual
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
+
+  
+  // Actualizar filas cuando los datos cambian o la página cambia
+  useEffect(() => {
+    console.log('useEffect', data)
+    setCurrentRows(data.slice(indexOfFirstRow, indexOfLastRow));
+  }, [data, currentPage]);
 
   // Cambiar página
   const handlePageChange = (pageNumber: number) => {

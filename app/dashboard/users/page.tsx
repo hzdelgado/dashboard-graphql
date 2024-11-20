@@ -24,6 +24,7 @@ const structure: FormStructure[] = [
 export default function Users() {
   const { showLoader, hideLoader } = useLoader();
   const [users, setUsers] = useState<any[]>([]);
+  const [updateCounter, setUpdateCounter] = useState(0); // Este estado se incrementa después de cada actualización
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
@@ -66,47 +67,45 @@ export default function Users() {
   };
 
   const handleInputChange = (data: any) => {
-    setSelectedUser(data);
-     // Compara los datos originales con los datos modificados
-     const hasChanges = JSON.stringify(data) !== JSON.stringify(originalUser);
-    setIsDirty(hasChanges)
+    // Diferimos la actualización del estado con un setTimeout
+    setTimeout(() => {
+      setSelectedUser(data); // Actualiza el estado de selectedUser
+      // Compara los datos originales con los datos modificados
+      const hasChanges = JSON.stringify(data) !== JSON.stringify(originalUser);
+      setIsDirty(hasChanges); // Actualiza si hay cambios
+    }, 0);
   };
 
   const handleClose = () => {
-    showLoader()
-    setIsSidePanelOpen(false)
-    setIsDirty(false)
-    // Realizar fetch de los usuarios después de cerrar el panel
-    const fetchUsers = async () => {
-      try {
-        const usersData = await getUsers();
-        setUsers(usersData);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      } finally {
-        hideLoader();
-      }
-    };
-    fetchUsers();
+    // No actualizamos el estado inmediatamente, sino que lo diferimos
+    setTimeout(() => {
+      setIsSidePanelOpen(false);
+      setIsDirty(false);
+    }, 0);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     showLoader()
-    const updateUser = async (id: string, active: boolean) => {
+    const updateUser = async () => {
       try {
         const input = {
-          id: id, // El id del usuario
-          active: active, // El estado de "activo"
+          id: selectedUser.id, 
+          active: selectedUser.active,
         };
         await updateUserService(input);
-        handleClose()
+        setUsers(prevUsers => 
+          prevUsers.map(user => 
+            user.id === selectedUser.id ? selectedUser : user
+          )
+        );
+        handleClose();
       } catch (error) {
         console.error("Error updating user:", error);
       } finally { 
         hideLoader()
       }
     };
-    updateUser(selectedUser.id, selectedUser.active);
+    updateUser();
   };
   return (
     <div>
