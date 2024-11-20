@@ -30,7 +30,6 @@ export default function PaginatedTable({
   
   // Actualizar filas cuando los datos cambian o la página cambia
   useEffect(() => {
-    console.log('useEffect', data)
     setCurrentRows(data.slice(indexOfFirstRow, indexOfLastRow));
   }, [data, currentPage]);
 

@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import client from "@/utils/apolloClient";
 
 type UseLogoutHook = {
   logout: () => Promise<void>;
@@ -21,6 +22,8 @@ const useLogout = (): UseLogoutHook  => {
       localStorage.removeItem("userId");
       localStorage.removeItem("userName");
       localStorage.removeItem("userProfile");
+      localStorage.removeItem("token");
+      client.clearStore();  // Limpiar la cache de Apollo Client
 
       if (response.ok) {
         // Redirigir al usuario a la página de login

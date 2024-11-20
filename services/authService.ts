@@ -1,4 +1,4 @@
-import client from "../utils/apolloClient";
+import client from "@/utils/apolloClient";
 import { gql } from "@apollo/client";
 
 // Definir la mutación de GraphQL
