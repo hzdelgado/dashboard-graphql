@@ -41,6 +41,7 @@ const RegisterForm = () => {
       localStorage.setItem("userId", userData.userId);
       localStorage.setItem("userName", userData.userName);
       localStorage.setItem("userProfile", userData.profile);
+      localStorage.setItem("token", userData.token);
 
       router.push("/dashboard/home")
     } catch (error: any) {
