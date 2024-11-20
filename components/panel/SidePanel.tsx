@@ -31,9 +31,9 @@ export default function SidePanel({
   
   const [fields, setFields] = useState<FieldConfig[]>(fieldsAdapter(data, formStructure));
   const [formData, setFormData] = useState<Record<string, any>>(data);
-  console.log('formData', formData)
 
   useEffect(() => {
+    setFormData(data); // Actualiza formData con el nuevo data
     setFields(fieldsAdapter(data, formStructure));
   }, [data, formStructure]);
 

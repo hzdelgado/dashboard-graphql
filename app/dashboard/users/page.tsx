@@ -26,13 +26,14 @@ export default function Users() {
   const [users, setUsers] = useState<any[]>([]);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isEdited, setIsEdited] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>({
     id: 1,
     name: "John Doe",
     email: "john@example.com",
-    active: 1,
+    active: false,
   });
+  const [originalUser, setOriginalUser] = useState<any>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -60,18 +61,21 @@ export default function Users() {
 
   const handleRowClick = (row: any) => {
     setSelectedUser(row);
+    setOriginalUser(row); // Guarda los datos originales para comparar
     setIsSidePanelOpen(true);
   };
 
   const handleInputChange = (data: any) => {
     setSelectedUser(data);
-    setIsEdited(true)
+     // Compara los datos originales con los datos modificados
+     const hasChanges = JSON.stringify(data) !== JSON.stringify(originalUser);
+    setIsDirty(hasChanges)
   };
 
   const handleClose = () => {
     showLoader()
     setIsSidePanelOpen(false)
-    setIsEdited(false)
+    setIsDirty(false)
     // Realizar fetch de los usuarios después de cerrar el panel
     const fetchUsers = async () => {
       try {
@@ -134,9 +138,10 @@ export default function Users() {
             </button>
             <button
               onClick={handleSave}
-              disabled={!isEdited}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
+              disabled={!isDirty}
+              className={`px-4 py-2 rounded text-white ${
+                isDirty ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+              }`}            >
               Guardar
             </button>
           </div>
