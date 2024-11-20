@@ -36,7 +36,6 @@ const RegisterForm = () => {
     try {
       const userData = await signUpUser(name, email, password);
       // Guardamos el token en una cookie con una fecha de expiración
-      console.log('userData', userData)
       setTokenInCookie(userData.token); // Expira en 1 día
       localStorage.setItem("userId", userData.userId);
       localStorage.setItem("userName", userData.userName);

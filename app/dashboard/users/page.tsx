@@ -49,7 +49,6 @@ export default function Users() {
         try {
           const usersData = await getUsers();
           setUsers(usersData);
-          console.log('userData', usersData)
         } catch (error) {
           console.error("Error fetching users:", error);
         } finally { 
@@ -109,7 +108,7 @@ export default function Users() {
   return (
     <div>
     {isAdmin &&<div className="p-4">
-      <h1 className="text-2xl font-bold mb-1 dark:text-white">Usuarios administradores</h1>
+      <h1 className="text-2xl font-bold mb-1 dark:text-white">Gestión de Usuarios</h1>
       <h4 className="mb-4 text-gray-500 mb-8 dark:text-white">Gestiona los usuarios con acceso a la plataforma</h4>
 
       <PaginatedTable
