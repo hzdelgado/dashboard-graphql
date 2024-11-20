@@ -18,6 +18,10 @@ const useLogout = (): UseLogoutHook  => {
         method: 'POST',
       });
 
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userProfile");
+
       if (response.ok) {
         // Redirigir al usuario a la página de login
         router.push('/login');

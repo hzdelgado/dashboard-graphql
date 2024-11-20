@@ -24,6 +24,9 @@ const LoginForm = () => {
         const userData = await loginUser(email, password);
         // Guardamos el token en una cookie con una fecha de expiración
         console.log('userData', userData)
+        localStorage.setItem("userId", userData.userId);
+        localStorage.setItem("userName", userData.userName);
+        localStorage.setItem("userProfile", userData.profile);
         setTokenInCookie(userData.token); // Expira en 1 día
         router.push("/dashboard/home")
       } catch (error: any) {

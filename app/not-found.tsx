@@ -1,4 +1,5 @@
 // app/not-found.tsx
+"use client";
 import { redirect } from 'next/navigation';
 
 const NotFound = () => {
