@@ -62,10 +62,23 @@ export default function SidePanel({
 
       {/* Contenido dinámico */}
       <div className="flex-1 overflow-y-auto">
-        {fields.map(({ label, name, type, editable }) => (
+        {fields.map(({ label, name, type, editable, options }) => (
           <div key={name} className="mb-4">
             <label className="block mb-1 font-medium">{label}</label>
-            {type === "switch" ? (
+            {type === "select" ? (
+              <select
+                value={formData[name]}
+                disabled={!editable}
+                onChange={(e) => handleInputChange(name, e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 dark:bg-slate-500 disabled:bg-gray-100 dark:disabled:text-gray-800"
+              >
+                {options?.map(({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            ): type === "switch" ? (
                <input
                type="checkbox"
                checked={formData[name]}

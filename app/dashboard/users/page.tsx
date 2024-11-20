@@ -17,6 +17,7 @@ const columns = [
 const structure: FormStructure[] = [
   { key: "name", label: "Nombre Completo", },
   { key: "email", label: "Correo electrónico" },
+  { key: "profile", label: "Perfil" },
   { key: "active", label: "Usuario activo?" },
 ];
 
@@ -40,6 +41,7 @@ export default function Users() {
     let isAdmin = storedData === 'ADMIN';
     if(!isAdmin) {
       router.push("/dashboard/access-denied");
+      hideLoader()
     } else {
       setIsAdmin(isAdmin);
       const fetchUsers = async () => {
@@ -67,6 +69,7 @@ export default function Users() {
   };
 
   const handleClose = () => {
+    showLoader()
     setIsSidePanelOpen(false)
     setIsEdited(false)
     // Realizar fetch de los usuarios después de cerrar el panel
@@ -84,6 +87,7 @@ export default function Users() {
   };
 
   const handleSave = () => {
+    showLoader()
     const updateUser = async (id: string, active: boolean) => {
       try {
         const input = {
@@ -100,9 +104,9 @@ export default function Users() {
     };
     updateUser(selectedUser.id, selectedUser.active);
   };
-
   return (
-    <div className="p-4">
+    <div>
+    {isAdmin &&<div className="p-4">
       <h1 className="text-2xl font-bold mb-1 dark:text-white">Usuarios administradores</h1>
       <h4 className="mb-4 text-gray-500 mb-8 dark:text-white">Gestiona los usuarios con acceso a la plataforma</h4>
 
@@ -139,5 +143,6 @@ export default function Users() {
         }
       />
     </div>
+  }</div>
   );
 }
