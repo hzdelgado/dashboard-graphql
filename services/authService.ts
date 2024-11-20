@@ -9,6 +9,7 @@ const LOGIN_MUTATION = gql`
       email
       userId
       userName
+      profile
     }
   }
 `;
@@ -20,6 +21,7 @@ const REGISTER_MUTATION = gql`
       email
       userId
       userName
+      profile
     }
   }
 `;

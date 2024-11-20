@@ -15,15 +15,11 @@ const GET_USERS = gql`
   }
 `;
 
-// Mutación para agregar un nuevo usuario (Ejemplo)
-const ADD_USER = gql`
-  mutation AddUser($name: String!, $email: String!, $password: String!) {
-    addUser(name: $name, email: $email, password: $password) {
-      token
-      userId
-      userName
-      email
-    }
+
+// Mutación para actualizar un usuario (Ejemplo)
+const UPDATE_USER = gql`
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input)
   }
 `;
 
@@ -37,15 +33,14 @@ export const getUsers = async () => {
   }
 };
 
-// Función para agregar un usuario
-export const addUser = async (name: string, email: string, password: string) => {
+export const updateUser = async (input: { id: string, active: boolean }) => {
   try {
     const { data } = await client.mutate({
-      mutation: ADD_USER,
-      variables: { name, email, password },
+      mutation: UPDATE_USER,
+      variables: { input },
     });
-    return data.addUser;
+    return data.updateUser;
   } catch (error: any) {
-    throw new Error("Error adding user: " + error.message);
+    throw new Error("Error updating user: " + error.message);
   }
 };

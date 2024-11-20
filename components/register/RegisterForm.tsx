@@ -99,7 +99,7 @@ const RegisterForm = () => {
         type="submit"
         className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
       >
-        Sign up
+        Registrarse
       </button>
     </form>
     <p className="mt-4 text-center text-sm text-gray-600">

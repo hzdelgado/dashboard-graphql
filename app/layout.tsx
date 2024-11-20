@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard ADMIN",
+  title: "Nairobi | Dashboard",
   description: "Dashboard to manage users and data",
 };
 

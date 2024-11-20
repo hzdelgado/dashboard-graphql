@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { fieldsAdapter, FieldConfig } from "@/components/table/fieldAdapter";
+import { useEffect, useState } from "react";
+import { fieldsAdapter, FieldConfig } from "@/components/panel/fieldAdapter";
+
+export interface FormStructure {
+  key: string;
+  label: string;
+}
 
 interface SidePanelProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   data: Record<string, any>;
-  onSave: (updatedData: Record<string, any>) => void;
   editable: boolean;
   footer?: React.ReactNode;
+  onChange: (formData: any) => void;
+  formStructure: FormStructure[];
 }
 
 export default function SidePanel({
@@ -18,20 +24,25 @@ export default function SidePanel({
   onClose,
   title,
   data,
-  onSave,
   footer,
-  editable
+  onChange,
+  formStructure
 }: SidePanelProps) {
-  const [fields, setFields] = useState<FieldConfig[]>(fieldsAdapter(data, editable));
+  
+  const [fields, setFields] = useState<FieldConfig[]>(fieldsAdapter(data, formStructure));
   const [formData, setFormData] = useState<Record<string, any>>(data);
+  console.log('formData', formData)
+
+  useEffect(() => {
+    setFields(fieldsAdapter(data, formStructure));
+  }, [data, formStructure]);
 
   const handleInputChange = (name: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSave = () => {
-    onSave(formData);
-    onClose();
+    setFormData((prev) => {
+      const newData = { ...prev, [name]: value }
+      onChange(newData)
+      return newData
+  });
   };
 
   if (!isOpen) return null;
@@ -51,7 +62,7 @@ export default function SidePanel({
 
       {/* Contenido dinámico */}
       <div className="flex-1 overflow-y-auto">
-        {fields.map(({ label, name, type, value, editable }) => (
+        {fields.map(({ label, name, type, editable }) => (
           <div key={name} className="mb-4">
             <label className="block mb-1 font-medium">{label}</label>
             {type === "switch" ? (
@@ -68,7 +79,7 @@ export default function SidePanel({
                 value={formData[name]}
                 disabled={!editable}
                 onChange={(e) => handleInputChange(name, e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 dark:bg-slate-500"
+                className="w-full border border-gray-300 rounded-md p-2 dark:bg-slate-500 disabled:bg-gray-100 dark:disabled:text-gray-800"
               />
             )}
           </div>

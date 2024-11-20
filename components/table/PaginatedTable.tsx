@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-interface Column {
+export interface Column {
   key: string;
   label: string;
 }
@@ -59,7 +59,11 @@ export default function PaginatedTable({
                   key={column.key}
                   className="border border-gray-300 px-4 py-2"
                 >
-                  {row[column.key]}
+                  {typeof row[column.key] === 'boolean' ? (
+            row[column.key] ? 'Sí' : 'No'
+          ) : (
+            row[column.key]
+          )}
                 </td>
               ))}
             </tr>

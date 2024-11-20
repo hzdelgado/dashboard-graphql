@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Logo from "@/components/Logo";
 
 const Sidebar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -11,9 +12,10 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <aside className="w-64 bg-gray-800 text-white p-4">
-    <h2 className="text-xl font-bold">Dashboard</h2>
-    <nav className="mt-4">
+    <aside className="w-64 bg-gray-800 text-white px-4 py-6">
+    <Logo src="/images/logo-white.svg" />
+
+    <nav className="mt-8">
       <ul>
         <li className="mb-2">
           <Link href="/dashboard/home">
