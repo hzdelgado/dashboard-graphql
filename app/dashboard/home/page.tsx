@@ -49,7 +49,7 @@ const Home = () => {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8 dark:text-white">
       <h1 className="text-2xl font-bold mb-4">Dashboard de Ventas</h1>
 
       <div className="grid grid-cols-2 gap-8">
