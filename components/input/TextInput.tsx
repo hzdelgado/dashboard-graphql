@@ -17,14 +17,14 @@ const TextInput = ({
     <div className="mb-4">
       <label
         htmlFor={label}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-gray-700 dark:text-white"
       >
         {label}
       </label>
       <input
         type={type}
         id="email"
-        className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-200"
+        className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-200 dark:bg-black dark:text-white"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

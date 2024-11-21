@@ -38,7 +38,7 @@ const LoginForm = () => {
     };
   
     return (
-        <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
+        <div className="w-full max-w-md bg-white p-8 rounded shadow-md dark:bg-black dark:text-white">
           <h2 className="text-2xl font-bold text-center mb-6">Ingreso</h2>
           <form onSubmit={handleLogin}>
             {/* Correo */}
@@ -64,7 +64,7 @@ const LoginForm = () => {
               Ingresar
             </button>
           </form>
-          <p className="mt-4 text-center text-sm text-gray-600">
+          <p className="mt-4 text-center text-sm text-gray-600 dark:text-white">
             ¿No estas registrado?{" "}
             <a
               href="/register"

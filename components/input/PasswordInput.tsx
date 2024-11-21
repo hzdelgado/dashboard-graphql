@@ -20,14 +20,14 @@ const PasswordInput = ({
     <div className="mb-4 relative">
       <label
         htmlFor={label}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-gray-700 dark:text-white"
       >
         {label}
       </label>
       <input
         type={showPassword ? "text" : "password"}
         id={label}
-        className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-white dark:bg-black"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

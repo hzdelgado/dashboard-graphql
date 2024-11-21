@@ -11,6 +11,7 @@ const columns = [
   { key: "id", label: "ID" },
   { key: "name", label: "Nombre Completo" },
   { key: "email", label: "Correo electrónico" },
+  { key: "profile", label: "Perfil" },
   { key: "active", label: "Usuario activo?" },
 ];
 
@@ -31,6 +32,7 @@ export default function Users() {
     id: 1,
     name: "John Doe",
     email: "john@example.com",
+    profile: "",
     active: false,
   });
   const [originalUser, setOriginalUser] = useState<any>(null);

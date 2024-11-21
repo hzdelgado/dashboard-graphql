@@ -52,12 +52,12 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
+    <div className="w-full max-w-md bg-white p-8 rounded shadow-md dark:bg-black">
 
     <form
       onSubmit={handleSubmit}
     >
-      <h1 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+      <h1 className="text-2xl font-semibold text-gray-800 text-center mb-6 dark:text-white">
         Registro
       </h1>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -102,7 +102,7 @@ const RegisterForm = () => {
         Registrarse
       </button>
     </form>
-    <p className="mt-4 text-center text-sm text-gray-600">
+    <p className="mt-4 text-center text-sm text-gray-600 dark:text-white">
     ¿Ya estas registrad@?{" "}
     <a
       href="/login"
