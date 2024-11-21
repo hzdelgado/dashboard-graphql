@@ -11,19 +11,33 @@ COPY . .
 # Instala dependencias
 RUN npm install
 
-# Compila la aplicación
+# Argumento para variables inyectadas en el build
+ARG NEXT_PUBLIC_GRAPHQL_API
+
+# Compila la aplicación usando las variables de entorno inyectadas
+ENV NEXT_PUBLIC_GRAPHQL_API=$NEXT_PUBLIC_GRAPHQL_API
 RUN npm run build
 
-# Usa una imagen más ligera para producción
+# Etapa de ejecución
 FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# Copia los archivos de la build
-COPY --from=builder /app ./
+# Copia los archivos necesarios desde la etapa de construcción
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
 
-# Expone el puerto en el que se ejecutará Next.js
+# Instala solo dependencias de producción
+RUN npm ci --only=production
+
+# Configura las variables de entorno para la ejecución del contenedor
+ENV NEXT_PUBLIC_GRAPHQL_API=$NEXT_PUBLIC_GRAPHQL_API
+
+# Expone el puerto
 EXPOSE 3000
+
+RUN echo "Building with NEXT_PUBLIC_GRAPHQL_API=$NEXT_PUBLIC_GRAPHQL_API"
 
 # Comando por defecto
 CMD ["npm", "start"]
