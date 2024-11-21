@@ -23,15 +23,13 @@ WORKDIR /app
 # Copia los archivos necesarios
 COPY --from=builder /app ./
 
-# Usa las variables en tiempo de ejecución
-ENV NEXT_PUBLIC_GRAPHQL_API=${NEXT_PUBLIC_GRAPHQL_API}
-ENV PORT=${PORT}
-
 # Expone el puerto configurado
 EXPOSE ${PORT}
 
+# Antes de ejecutar npm start, imprime las variables de entorno
+RUN echo "Starting app with the following environment variables:" \
+    && echo "NEXT_PUBLIC_GRAPHQL_API=${NEXT_PUBLIC_GRAPHQL_API}" \
+    && echo "PORT=${PORT}"
+
 # Comando por defecto
 CMD ["npm", "start"]
-
-RUN echo "NEXT_PUBLIC_GRAPHQL_API: ${NEXT_PUBLIC_GRAPHQL_API}"
-RUN echo "PORT: ${PORT}"
