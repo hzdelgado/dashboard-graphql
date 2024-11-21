@@ -49,20 +49,20 @@ const Home = () => {
   };
 
   return (
-    <div className="p-8 dark:text-white">
+    <div className="p-8 dark:text-white" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
       <h1 className="text-2xl font-bold mb-4">Dashboard de Ventas</h1>
 
       <div className="grid grid-cols-2 gap-8">
         <div className="col-span-1">
           <h2 className="text-xl mb-4">Ventas por Mes (Gráfico de Barras)</h2>
-          <div className="w-full" style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <div className="w-full" style={{ maxWidth: '600px', margin: '0 auto', overflow: 'auto' }}>
             <BarChart data={barChartData} options={{ responsive: true }} />
           </div>
         </div>
 
         <div className="col-span-1">
           <h2 className="text-xl mb-4">Compradores por Género (Gráfico de Pastel)</h2>
-          <div className="w-full" style={{ maxWidth: '400px', margin: '0 auto' }}>
+          <div className="w-full" style={{ maxWidth: '400px', margin: '0 auto', overflow: 'auto' }}>
             <PieChart data={pieChartData} options={{ responsive: true }} />
           </div>
         </div>
