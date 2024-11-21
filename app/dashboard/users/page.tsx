@@ -89,6 +89,7 @@ export default function Users() {
         const input = {
           id: selectedUser.id, 
           active: selectedUser.active,
+          profile: selectedUser.profile
         };
         await updateUserService(input);
         setUsers(prevUsers => 

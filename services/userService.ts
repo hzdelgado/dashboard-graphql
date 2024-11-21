@@ -33,7 +33,7 @@ export const getUsers = async () => {
   }
 };
 
-export const updateUser = async (input: { id: string, active: boolean }) => {
+export const updateUser = async (input: { id: string, active: boolean, profile: string }) => {
   try {
     const { data } = await client.mutate({
       mutation: UPDATE_USER,
