@@ -5,6 +5,3 @@ services:
       dockerfile: Dockerfile
     deploy:
       startCommand: npm start
-    env:
-      NEXT_PUBLIC_GRAPHQL_API: $NEXT_PUBLIC_GRAPHQL_API
-      PORT: $PORT

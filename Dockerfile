@@ -32,3 +32,6 @@ EXPOSE ${PORT}
 
 # Comando por defecto
 CMD ["npm", "start"]
+
+RUN echo "NEXT_PUBLIC_GRAPHQL_API: ${NEXT_PUBLIC_GRAPHQL_API}"
+RUN echo "PORT: ${PORT}"
