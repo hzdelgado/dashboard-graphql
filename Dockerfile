@@ -24,8 +24,8 @@ WORKDIR /app
 COPY --from=builder /app ./
 
 # Usa las variables en tiempo de ejecución
-ENV NEXT_PUBLIC_GRAPHQL_API=$NEXT_PUBLIC_GRAPHQL_API
-ENV PORT=$PORT
+ENV NEXT_PUBLIC_GRAPHQL_API=${NEXT_PUBLIC_GRAPHQL_API}
+ENV PORT=${PORT}
 
 # Expone el puerto configurado
 EXPOSE ${PORT}
