@@ -16,3 +16,7 @@ Thumbs.db
 
 # Archivos sensibles
 .env
+
+# Ignorar los siguientes archivos de configuración (si no son necesarios)
+docker-compose.yml
+Dockerfile
