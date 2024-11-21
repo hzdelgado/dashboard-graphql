@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
 
-const SERVICE_URL = process.env.GRAPHQL_API || 'http://localhost:4000/graphql';
+const SERVICE_URL = process.env.NEXT_PUBLIC_GRAPHQL_API || 'http://localhost:4000/graphql';
 // Función para obtener el token desde el almacenamiento (por ejemplo, localStorage)
 const getToken = () => {
   // Asumimos que el token está guardado en el localStorage
