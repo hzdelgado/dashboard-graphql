@@ -68,7 +68,7 @@ const LoginForm = () => {
             ¿No estas registrado?{" "}
             <a
               href="/register"
-              className="text-indigo-900 hover:underline"
+              className="text-indigo-900 underline"
             >
               Regístrate aquí
             </a>

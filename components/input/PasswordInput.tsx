@@ -27,7 +27,7 @@ const PasswordInput = ({
       <input
         type={showPassword ? "text" : "password"}
         id={label}
-        className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder:text-slate-900 dark:placeholder:text-slate-400 dark:text-white dark:bg-black"
+        className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder:text-slate-900 dark:placeholder:text-slate-400 dark:text-white dark:bg-black"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -102,11 +102,11 @@ const RegisterForm = () => {
         Registrarse
       </button>
     </form>
-    <p className="mt-4 text-center text-sm text-gray-600 dark:text-white">
+    <p className="mt-4 text-center text-sm text-gray-900 dark:text-white">
     ¿Ya estas registrad@?{" "}
     <a
       href="/login"
-      className="text-indigo-600 hover:underline"
+      className="text-indigo-900 underline"
     >
       Ingresa aquí
     </a>
