@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
         PORT: process.env.PORT,
     },
     webpack(config) {
-        // Modificaciones adicionales de Webpack si son necesarias
         return config;
     },
 };
