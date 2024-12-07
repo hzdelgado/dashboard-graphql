@@ -39,7 +39,7 @@ const LoginForm = () => {
   
     return (
         <div className="w-full max-w-md bg-white p-8 rounded shadow-md dark:bg-black dark:text-white">
-          <h2 className="text-2xl font-bold text-center mb-6">Ingreso</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-black dark:text-white">Ingreso</h2>
           <form onSubmit={handleLogin}>
             {/* Correo */}
             <TextInput
@@ -64,11 +64,11 @@ const LoginForm = () => {
               Ingresar
             </button>
           </form>
-          <p className="mt-4 text-center text-sm text-gray-600 dark:text-white">
+          <p className="mt-4 text-center text-sm text-slate-900 dark:text-white">
             ¿No estas registrado?{" "}
             <a
               href="/register"
-              className="text-indigo-600 hover:underline"
+              className="text-indigo-900 hover:underline"
             >
               Regístrate aquí
             </a>
