@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import PasswordInput from "../input/PasswordInput";
 import { isValidPassword } from "../../utils/validations";
-import TextInput from "../input/TextInput";
 import { signUpUser } from "@/services/authService";
 import { setTokenInCookie } from "@/utils/cookies";
 import { useLoader } from "@/context/LoaderContext";
+import dynamic from 'next/dynamic';
+const TextInput = dynamic(() => import("../input/TextInput"), { ssr: false });
+const PasswordInput = dynamic(() => import("../input/PasswordInput"), { ssr: false });
+
 
 const RegisterForm = () => {
   const [name, setName] = useState<string>("");
