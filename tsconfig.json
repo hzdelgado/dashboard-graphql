@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,15 +22,35 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",  // Establece la raíz del proyecto como la base para los imports.
+    "baseUrl": ".", // Establece la raíz del proyecto como la base para los imports.
     "paths": {
-      "@/utils/*": ["./utils/*"],
-      "@/services/*": ["./services/*"],
-      "@/components/*": ["./components/*"],
-      "@/context/*": ["./context/*"],
-      "@/hooks/*": ["./hooks/*"],
+      "@/app/*": [
+        "./app/*"
+      ],
+      "@/utils/*": [
+        "./utils/*"
+      ],
+      "@/services/*": [
+        "./services/*"
+      ],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/context/*": [
+        "./context/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

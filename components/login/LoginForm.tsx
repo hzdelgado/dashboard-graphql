@@ -51,6 +51,7 @@ const LoginForm = () => {
               type="email"
               placeholder="Ingresa tu correo"
               value={email}
+              testId="email"
               onChange={setEmail}
             />
             {/* Contraseña */}
@@ -58,6 +59,7 @@ const LoginForm = () => {
               label="Contraseña"
               placeholder="Ingresa tu contraseña"
               value={password}
+              testId="password"
               onChange={setPassword}
             />
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}

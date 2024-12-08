@@ -70,6 +70,7 @@ const RegisterForm = () => {
               type="text"
               placeholder="Ingresa tu nombre completo"
               value={name}
+              testId="fullName"
               onChange={setName}
             />
       {/* Correo */}
@@ -78,6 +79,7 @@ const RegisterForm = () => {
               type="email"
               placeholder="Ingresa tu correo"
               value={email}
+              testId="email"
               onChange={setEmail}
             />
 
@@ -85,6 +87,7 @@ const RegisterForm = () => {
       <PasswordInput
         label="Contraseña"
         placeholder="Crea una contraseña"
+        testId="password"
         value={password}
         onChange={setPassword}
       />
@@ -93,6 +96,7 @@ const RegisterForm = () => {
       <PasswordInput
         label="Confirmar Contraseña"
         placeholder="Confirma tu contraseña"
+        testId="repeatPassword"
         value={confirmPassword}
         onChange={setConfirmPassword}
       />

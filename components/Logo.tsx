@@ -24,7 +24,6 @@ const Logo: React.FC<LogoProps> = ({
     <Image
       src={src}
       alt={alt}
-      loading="lazy"
       width={width}
       height={height}
       className={`object-contain ${className}`}

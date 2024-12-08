@@ -4,6 +4,7 @@ import { useState } from "react";
 interface PasswordInputProps {
   label: string;
   placeholder: string;
+  testId: string;
   value: string;
   onChange: (value: string) => void;
 }
@@ -11,6 +12,7 @@ interface PasswordInputProps {
 const PasswordInput = ({
   label,
   placeholder,
+  testId,
   value,
   onChange,
 }: PasswordInputProps) => {
@@ -26,7 +28,8 @@ const PasswordInput = ({
       </label>
       <input
         type={showPassword ? "text" : "password"}
-        id={label}
+        data-testid={testId}
+        id={label.toLowerCase()}
         className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder:text-slate-900 dark:placeholder:text-slate-400 dark:text-white dark:bg-black"
         placeholder={placeholder}
         value={value}
