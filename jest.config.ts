@@ -13,6 +13,7 @@ const config: Config = {
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
   },
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',

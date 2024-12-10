@@ -3,6 +3,7 @@ import BarChart from '@/components/charts/BarChart';
 import PieChart from '@/components/charts/PieChart';
 import SalesList from '@/components/dashboard/SalesList';
 import NotificationList from '@/components/dashboard/NotificationList';
+import React from 'react';
 
 // Datos estáticos para el listado de ventas
 const staticSalesData = [

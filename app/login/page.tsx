@@ -1,6 +1,7 @@
 "use client";
 import Logo from "@/components/Logo";
 import LoginForm from "@/components/login/LoginForm";
+import React from "react";
 
 const LoginPage = () => {
 

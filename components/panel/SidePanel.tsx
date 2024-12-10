@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fieldsAdapter, FieldConfig } from "@/components/panel/fieldAdapter";
+import React from "react";
 
 export interface FormStructure {
   key: string;
@@ -13,7 +14,6 @@ interface SidePanelProps {
   onClose: () => void;
   title: string;
   data: Record<string, any>;
-  editable: boolean;
   footer?: React.ReactNode;
   onChange: (formData: any) => void;
   formStructure: FormStructure[];
@@ -64,9 +64,10 @@ export default function SidePanel({
       <div className="flex-1 overflow-y-auto">
         {fields.map(({ label, name, type, editable, options }) => (
           <div key={name} className="mb-4">
-            <label className="block mb-1 font-medium">{label}</label>
+            <label htmlFor={label} className="block mb-1 font-medium">{label}</label>
             {type === "select" ? (
               <select
+                id={label}
                 value={formData[name]}
                 disabled={!editable}
                 onChange={(e) => handleInputChange(name, e.target.value)}
@@ -80,6 +81,7 @@ export default function SidePanel({
               </select>
             ): type === "switch" ? (
                <input
+               id={label}
                type="checkbox"
                checked={formData[name]}
                disabled={!editable}
@@ -88,6 +90,7 @@ export default function SidePanel({
              />
             ) : (
               <input
+                id={label}
                 type={type}
                 value={formData[name]}
                 disabled={!editable}

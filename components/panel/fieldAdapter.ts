@@ -21,7 +21,7 @@ const selectOptions: Record<string, { value: string; label: string }[]> = {
 };
 
 export const fieldsAdapter = (data: Record<string, any>, structure: FormStructure[]): FieldConfig[] => {
-  let keys: String[] = structure.map((s) => s.key)
+  let keys: String[] = structure.map((s) => s.key.toLowerCase())
   return Object.entries(data)
   .filter(([key]) => keys.includes(key.toLowerCase()))
   .map(([key, value]) => {

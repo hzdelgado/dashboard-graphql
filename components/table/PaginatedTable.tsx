@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useState } from "react";
 
 export interface Column {
@@ -84,6 +85,7 @@ export default function PaginatedTable({
           (_, i) => i + 1
         ).map((pageNumber) => (
           <button
+            data-testid={'nav'+pageNumber}
             key={pageNumber}
             onClick={() => handlePageChange(pageNumber)}
             className={`mx-1 px-3 py-1 rounded ${
