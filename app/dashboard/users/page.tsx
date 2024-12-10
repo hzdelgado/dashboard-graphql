@@ -2,7 +2,9 @@
 
 import PaginatedTable from "@/components/table/PaginatedTable";
 import { useEffect, useState } from "react";
-import SidePanel, { FormStructure } from "@/components/panel/SidePanel";
+import dynamic from 'next/dynamic';
+const SidePanel = dynamic(() => import("@/components/panel/SidePanel"), { ssr: false });
+import { FormStructure } from "@/components/panel/SidePanel";
 import { useRouter } from "next/navigation";
 import { useLoader } from "@/context/LoaderContext";
 import { getUsers, updateUser as updateUserService } from "@/services/userService"; // Importa el servicio de usuarios
@@ -126,7 +128,6 @@ export default function Users() {
         onClose={handleClose}
         title="Detalle de Usuario"
         data={selectedUser}
-        editable={isAdmin}
         onChange={handleInputChange}
         footer={
           <div className="flex justify-between">

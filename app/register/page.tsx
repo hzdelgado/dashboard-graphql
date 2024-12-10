@@ -1,5 +1,6 @@
 import RegisterForm from "@/components/register/RegisterForm";
 import Logo from "@/components/Logo";
+import React from "react";
 
 const RegisterPage = () => {
   return (
