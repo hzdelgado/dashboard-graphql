@@ -13,6 +13,9 @@ const config: Config = {
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!@apollo/client|graphql|js-cookie)",
+  ],  
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
@@ -29,7 +32,6 @@ const config: Config = {
    // Indicates which provider should be used to instrument code for coverage
    coverageProvider: "v8",
    testPathIgnorePatterns: ["/tests-node/", "<rootDir>/tests/playwright/"], // Ignorar pruebas específicas para Node
-
 };
 
 export default config;

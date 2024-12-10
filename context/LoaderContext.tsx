@@ -20,4 +20,10 @@ export const LoaderProvider = ({ children }: { children: ReactNode }) => {
 };
 
 // Hook personalizado para acceder al estado de carga
-export const useLoader = () => useContext(LoaderContext);
+export const useLoader = () => {
+  const context = useContext(LoaderContext);
+  if (!context) {
+    throw new Error("useLoader must be used within a ThemeProvider");
+  }
+  return context;
+};
