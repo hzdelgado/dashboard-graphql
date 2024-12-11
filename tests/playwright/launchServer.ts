@@ -1,3 +1,4 @@
+import { setTokenInCookie } from "@/utils/cookies";
 import { ChildProcess, exec } from "child_process";
 import { promisify } from "util";
 // Promisificar exec para usar async/await
@@ -20,4 +21,12 @@ export const waitForServer = async (url: string, timeout: number = 10000) => {
 
 export const stopServer = (serverProcess: ChildProcess) => {
   serverProcess.kill("SIGINT"); // Enviar una señal de terminación al proceso
+};
+
+export const fakeLogin = ({ token, userId, userName, profile }: any) => {
+  localStorage.setItem("token", token);
+  localStorage.setItem("userId", userId);
+  localStorage.setItem("userName", userName);
+  localStorage.setItem("userProfile", profile);
+  setTokenInCookie(token);
 };
