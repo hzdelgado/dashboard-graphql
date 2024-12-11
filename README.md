@@ -16,6 +16,8 @@ npm run build
 npm run start
 ```
 ### Ejecutas pruebas unitarias
+- Es necesario tener configurado la propiedad jsx como `react-jsx` en el archivo `tsconfig.json`.
+
 ```bash
 npm run test:jest
 ```
