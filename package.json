@@ -2,6 +2,7 @@
   "name": "dashboard-graphql",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,7 @@
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true next build",
     "test:jest": "npx jest",
-    "test:playwright": "npx playwright test",
+    "test:playwright": "npm run build && npx playwright test",
     "test:node": "npx jest --config=jest.node.config.ts"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
     "dotenv": "^16.4.5",
+    "get-port": "^7.1.0",
     "graphql": "^16.9.0",
     "js-cookie": "^3.0.5",
     "next": "15.0.3",

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { isValidPassword } from "../../utils/validations";
 import { signUpUser } from "@/services/authService";
 import { setTokenInCookie } from "@/utils/cookies";
+import useLogin from '@/hooks/useLogin';
 import { useLoader } from "@/context/LoaderContext";
 import dynamic from 'next/dynamic';
 import React from "react";
@@ -12,6 +13,7 @@ const PasswordInput = dynamic(() => import("../input/PasswordInput"), { ssr: fal
 
 
 const RegisterForm = () => {
+  const { login } = useLogin();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -38,14 +40,7 @@ const RegisterForm = () => {
 
     try {
       const userData = await signUpUser(name, email, password);
-      // Guardamos el token en una cookie con una fecha de expiración
-      setTokenInCookie(userData.token); // Expira en 1 día
-      localStorage.setItem("userId", userData.userId);
-      localStorage.setItem("userName", userData.userName);
-      localStorage.setItem("userProfile", userData.profile);
-      localStorage.setItem("token", userData.token);
-
-      router.push("/dashboard/home")
+      await login(userData)
     } catch (error: any) {
       setError(error.message);
     } finally {

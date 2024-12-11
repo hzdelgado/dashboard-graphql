@@ -1,12 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { setTokenInCookie } from "@/utils/cookies";
-
 import { useLoader } from "@/context/LoaderContext";
 import { loginUser } from "@/services/authService";
-
+import useLogin from '@/hooks/useLogin';
 import dynamic from 'next/dynamic';
 import React from "react";
 const TextInput = dynamic(() => import("../input/TextInput"), { ssr: false });
@@ -14,7 +11,7 @@ const PasswordInput = dynamic(() => import("../input/PasswordInput"), { ssr: fal
 
 
 const LoginForm = () => {
-    const router = useRouter();
+    const { login } = useLogin();
     const { showLoader, hideLoader } = useLoader(); // Hook para manipular el estado de carga global
 
     // Estados para el formulario
@@ -27,14 +24,7 @@ const LoginForm = () => {
       showLoader();
       try {
         const userData = await loginUser(email, password);
-        // Guardamos el token en una cookie con una fecha de expiración
-        localStorage.setItem("userId", userData.userId);
-        localStorage.setItem("userName", userData.userName);
-        localStorage.setItem("userProfile", userData.profile);
-        localStorage.setItem("token", userData.token);
-
-        setTokenInCookie(userData.token); // Expira en 1 día
-        router.push("/dashboard/home")
+        await login(userData);
       } catch (error: any) {
         setError(error.message);
       } finally {

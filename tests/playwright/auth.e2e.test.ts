@@ -1,44 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { ChildProcess, exec } from "child_process";
-import { execPromise, waitForServer } from "./launchServer";
-
-let serverProcess: ChildProcess;
+import { execPromise, test as textExt } from './e2e-setup';
 
 test.describe("User Authorization Flow", () => {
-  test.beforeAll(async () => {
-    // Arrancar el servidor
-    try {
-      await execPromise("npm run build"); // Usa exec para iniciar el servidor
-      console.log("Server is building...");
-    } catch (error) {
-      console.error("Error while building server:", error);
-      throw error; // Lanzamos el error si el servidor no puede iniciarse
-    }
-  });
-  test.beforeEach(async () => {
-    // Arrancar el servidor
-    try {
-      serverProcess = exec("npm run start"); // Usa exec para iniciar el servidor
-      await waitForServer('http://localhost:3000');
-      console.log("Server is starting...");
-    } catch (error) {
-      console.error("Error while starting server:", error);
-      throw error; // Lanzamos el error si el servidor no puede iniciarse
-    }
-  });
-  test.afterEach(() => {
-    // Detener el servidor después de todas las pruebas
-    if (serverProcess) {
-      serverProcess.kill("SIGINT"); // Enviar señal SIGINT para detener el servidor
-      console.log("Server process terminated.");
-    }
-  });
 
-  test("Register Performance test", async ({ page }) => {
+  textExt("Register Performance test", async ({ page, server }) => {
     // Empieza a medir el tiempo de carga
     const start = performance.now();
 
-    await page.goto("http://localhost:3000/register");
+    await page.goto(`http://localhost:${server.port}/register`);
 
     const end = performance.now();
     console.log(`Page load time: ${end - start} ms`);
@@ -47,11 +16,11 @@ test.describe("User Authorization Flow", () => {
     expect(end - start).toBeLessThan(3000); // El tiempo de carga debe ser menor a 3 segundos
   });
 
-  test("Login Performance test", async ({ page }) => {
+  textExt("Login Performance test", async ({ page, server }) => {
     // Empieza a medir el tiempo de carga
     const start = performance.now();
 
-    await page.goto("http://localhost:3000/login");
+    await page.goto(`http://localhost:${server.port}/login`);
 
     const end = performance.now();
     console.log(`Page load time: ${end - start} ms`);
@@ -60,8 +29,8 @@ test.describe("User Authorization Flow", () => {
     expect(end - start).toBeLessThan(3000); // El tiempo de carga debe ser menor a 3 segundos
   });
 
-  test("LoginPage with mocked data loads and allows login interaction", async ({
-    page,
+  textExt("LoginPage with mocked data loads and allows login interaction", async ({
+    page, server
   }) => {
     try {
          // Interceptar la solicitud de GraphQL para la mutación LOGIN_MUTATION
@@ -88,7 +57,7 @@ test.describe("User Authorization Flow", () => {
           }
         });  
 
-      await page.goto("http://localhost:3000/login");
+      await page.goto(`http://localhost:${server.port}/login`);
 
       // Verifica que el logo se carga
       const logo = page.locator("img[alt='Logo']");
@@ -111,8 +80,8 @@ test.describe("User Authorization Flow", () => {
     }
   });
 
-  test("RegisterPage with mocked data loads and allows register interaction", async ({
-    page,
+  textExt("RegisterPage with mocked data loads and allows register interaction", async ({
+    page, server
   }) => {
     try {
       // Interceptar la solicitud de GraphQL para la mutación REGISTER_MUTATION
@@ -139,7 +108,7 @@ test.describe("User Authorization Flow", () => {
         }
       });
 
-      await page.goto("http://localhost:3000/register");
+      await page.goto(`http://localhost:${server.port}/register`);
 
       // Verifica que el logo se carga
       const logo = page.locator("img[alt='Logo']");
