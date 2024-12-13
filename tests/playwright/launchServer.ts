@@ -13,7 +13,7 @@ export const waitForServer = async (url: string, timeout: number = 10000) => {
       return;
     } catch (error) {
       console.log("Waiting for server...");
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Esperar 5 segundos antes de reintentar
+      await new Promise((resolve) => setTimeout(resolve, 10000)); // Esperar 10000 segundos antes de reintentar
     }
   }
   throw new Error(`Timeout waiting for server ${url}`);

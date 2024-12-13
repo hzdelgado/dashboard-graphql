@@ -10,8 +10,7 @@
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true next build",
     "test:jest": "npx jest",
-    "test:playwright": "npm run build && npx playwright test",
-    "test:node": "npx jest --config=jest.node.config.ts"
+    "test:playwright": "npm run build && npx playwright test"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",

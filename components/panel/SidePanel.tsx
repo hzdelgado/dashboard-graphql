@@ -48,7 +48,7 @@ export default function SidePanel({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 w-80 bg-white shadow-lg border-l p-4 z-50 dark:bg-black dark:text-white">
+    <div role="dialog" className="fixed inset-y-0 right-0 w-80 bg-white shadow-lg border-l p-4 z-50 dark:bg-black dark:text-white">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">{title}</h2>
@@ -68,6 +68,7 @@ export default function SidePanel({
             {type === "select" ? (
               <select
                 id={label}
+                name={name}
                 value={formData[name]}
                 disabled={!editable}
                 onChange={(e) => handleInputChange(name, e.target.value)}
@@ -82,6 +83,7 @@ export default function SidePanel({
             ): type === "switch" ? (
                <input
                id={label}
+               name={name}
                type="checkbox"
                checked={formData[name]}
                disabled={!editable}
@@ -91,6 +93,7 @@ export default function SidePanel({
             ) : (
               <input
                 id={label}
+                name={name}
                 type={type}
                 value={formData[name]}
                 disabled={!editable}

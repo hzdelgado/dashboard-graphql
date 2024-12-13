@@ -44,6 +44,7 @@ export default function Users() {
     showLoader()
     const storedData = localStorage.getItem("userProfile");
     let isAdmin = storedData === 'ADMIN';
+    console.log('isAdmin', isAdmin)
     if(!isAdmin) {
       router.push("/dashboard/access-denied");
       hideLoader()
@@ -75,6 +76,7 @@ export default function Users() {
       // Compara los datos originales con los datos modificados
       const hasChanges = JSON.stringify(data) !== JSON.stringify(originalUser);
       setIsDirty(hasChanges); // Actualiza si hay cambios
+      console.log('handleInputChange', data, hasChanges )
     }, 0);
   };
 
@@ -142,7 +144,7 @@ export default function Users() {
               disabled={!isDirty}
               className={`px-4 py-2 rounded text-white ${
                 isDirty ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
-              }`}            >
+              }`}>
               Guardar
             </button>
           </div>
